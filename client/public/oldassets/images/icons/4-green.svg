@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg fill="#20D760" width="800px" height="800px" viewBox="0 0 24 24" id="luggage-icon" xmlns="http://www.w3.org/2000/svg" class="icon line">
+  <path d="M6,2H18A2,2,0,0,1,20,4V6H4V4A2,2,0,0,1,6,2ZM4,8H20V18H4ZM6,10V16H8V10ZM10,10V16H12V10ZM14,10V16H16V10ZM18,10V16H20V10Z" style="fill: none; stroke: rgb(30, 203, 21); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></path>
+  <circle cx="8" cy="19" r="1" style="fill: none; stroke: rgb(30, 203, 21); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></circle>
+  <circle cx="16" cy="19" r="1" style="fill: none; stroke: rgb(30, 203, 21); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></circle>
+</svg>

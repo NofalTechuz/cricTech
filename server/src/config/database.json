@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Techuz@123",
+    "database": "cricTech",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "tajtourstravels_taj",
+    "password": "Tajtourstravels@2024#",
+    "database": "tajtourstravels_taj",
+    "host": "tajtoursandtravels.com",
+    "dialect": "mysql"
+  }
+}
