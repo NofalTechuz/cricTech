@@ -165,7 +165,7 @@ const Team = () => {
                       >
                         Edit
                       </button>
-                      <button className="btn btn-sm btn-danger" onClick={() => openDeleteModal(set)}>
+                      <button className="btn btn-sm btn-danger" style={{ marginLeft: '10px' }} onClick={() => openDeleteModal(set)}>
                         Delete
                       </button>
                     </td>
