@@ -9,3 +9,6 @@ node_modules
 
 blogweb-ts
 
+
+client/.env
+server/.env
