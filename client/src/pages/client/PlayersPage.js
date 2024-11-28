@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PublicApiInstance from '../../Utils/PublicApiInstance';
 import '../../assets/css/client/Players.css';
@@ -141,15 +141,10 @@ const PlayersPage = () => {
               style={{ border: 'none' }}
             ></iframe>
 
+<div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {
             !selectedPlayer.is_sold && (
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              {/* <div>
-                <button className="back-button" onClick={closeModal}>
-                  Unsold
-                </button>
-              </div> */}
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <div style={{ display: 'flex', flexDirection: 'row' }} > 
                 <form>
                   <div className="flex-row" style={{ display: 'flex', alignItems: 'center' }}>
                     <label style={{ marginRight: '10px' }}>Select Team</label>
@@ -170,9 +165,16 @@ const PlayersPage = () => {
                   Sold
                 </button>
               </div>
-            </div>
             )
           }
+              <div>
+              <button className="back-button">
+                <a href={selectedPlayer.link} target="_blank" style={{color: "#fff", textDecoration: "none"}}>
+                  Visit Profile
+                </a>
+                </button>
+              </div>
+          </div>
           </div>
         </div>
       )}

@@ -2,8 +2,8 @@ import {  Route, Routes } from "react-router-dom";
 import React, { Suspense } from "react";
 import HomePage from "../../pages/client/Homepage";
 import PlayersPage from "../../pages/client/PlayersPage";
-import "../../assets/css/client/main.css";
 import TeamPlayers from "../../pages/client/TeamPlayers";
+import "../../assets/css/client/main.css";
 
 const NotFound = React.lazy(() => import('../../pages/client/404/NotFound'));
 

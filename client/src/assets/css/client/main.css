@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  background-image: linear-gradient(to right, #FFF4E8, #ECE9FC);
 }
 
 .container {
@@ -25,7 +25,7 @@ h1, h2 {
 }
 
 .set-card, .team-card {
-  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  background-image: linear-gradient(135deg, #1A271D, #23462A);
   color: white;
   border-radius: 15px;
   padding: 20px;
