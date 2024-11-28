@@ -1,8 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import React, { Suspense } from 'react';
 import Loading from '../../Layouts/admin/Loading';
-import AdminPageGuard from '../../shared/AdminPageGuard';
-import AdminAuthGuard from '../../shared/AdminAuthGuard';
 
 const Dashboard = React.lazy(() => import('../../pages/admin/Dashboard'));
 

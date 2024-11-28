@@ -272,30 +272,30 @@ const Players = () => {
                         type="checkbox"
                         className="form-check-input"
                         name="skill"
-                        value="Beginner"
+                        value="batsman"
                         onChange={handleInputChange}
                       />
-                      <label className="form-check-label">Beginner</label>
+                      <label className="form-check-label">batsman</label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
                         className="form-check-input"
                         name="skill"
-                        value="Intermediate"
+                        value="bowler"
                         onChange={handleInputChange}
                       />
-                      <label className="form-check-label">Intermediate</label>
+                      <label className="form-check-label">bowler</label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
                         className="form-check-input"
                         name="skill"
-                        value="Advanced"
+                        value="wicket keeper"
                         onChange={handleInputChange}
                       />
-                      <label className="form-check-label">Advanced</label>
+                      <label className="form-check-label">wicket keeper</label>
                     </div>
                   </div>
                 </div>
@@ -375,33 +375,33 @@ const Players = () => {
                         type="checkbox"
                         className="form-check-input"
                         name="skill"
-                        value="Beginner"
-                        checked={playerData.skill.split(',').includes('Beginner')}
+                        value="batsman"
+                        checked={playerData.skill.split(',').includes('batsman')}
                         onChange={handleInputChange}
                       />
-                      <label className="form-check-label">Beginner</label>
+                      <label className="form-check-label">batsman</label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
                         className="form-check-input"
                         name="skill"
-                        value="Intermediate"
-                        checked={playerData.skill.split(',').includes('Intermediate')}
+                        value="bowler"
+                        checked={playerData.skill.split(',').includes('bowler')}
                         onChange={handleInputChange}
                       />
-                      <label className="form-check-label">Intermediate</label>
+                      <label className="form-check-label">bowler</label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
                         className="form-check-input"
                         name="skill"
-                        value="Advanced"
-                        checked={playerData.skill.split(',').includes('Advanced')}
+                        value="wicket keeper"
+                        checked={playerData.skill.split(',').includes('wicket keeper')}
                         onChange={handleInputChange}
                       />
-                      <label className="form-check-label">Advanced</label>
+                      <label className="form-check-label">wicket keeper</label>
                     </div>
                   </div>
                 </div>

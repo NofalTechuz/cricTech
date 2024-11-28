@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import PublicApiInstance from "../../Utils/PublicApiInstance";
 
 const playersData = {
     A: [
@@ -64,10 +66,20 @@ const playersData = {
   
     const set = new URLSearchParams(location.search).get("set");
   
-    useEffect(() => {
-      if (set && playersData[set]) {
-        setPlayers(playersData[set]);
+    const fetchPlayers = async () => {
+      try {
+        const response = await PublicApiInstance.get(`/players/sets/${set}`);
+        console.log(response);
+        setPlayers(response.data.data);
+      } catch (error) {
+        console.error(error);
+        toast.error('Failed to fetch players.');
       }
+    };
+
+    useEffect(() => {
+
+      fetchPlayers();
     }, [set]);
   
     const handlePlayerClick = (player) => {
@@ -97,9 +109,9 @@ const playersData = {
               </div>
               <div className="player-name">{player.name}</div>
               <div className="player-roles">
-                {player.roles.includes("batter") && <span className="role-icon">🏏</span>}
-                {player.roles.includes("bowler") && <span className="role-icon">🎳</span>}
-                {player.roles.includes("wk") && <span className="role-icon">🧤</span>}
+                {player.skill.includes("batsman") && <span className="role-icon">🏏</span>}
+                {player.skill.includes("bowler") && <span className="role-icon">🎳</span>}
+                {player.skill.includes("wicket keeper") && <span className="role-icon">🧤</span>}
               </div>
             </div>
           ))}

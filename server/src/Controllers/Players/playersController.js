@@ -24,6 +24,17 @@ const createPlayer = async (req, res) => {
 
 
 
+const fetchPlayersBySets = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const players = await Players.findAll({ where: { set_id: id } });
+    return res.withData(players, 'GET_ALL_PLAYERS', 200);
+  } catch (error) {
+    return res.withError(error)
+  }
+}
+
+
 const getPlayers = async (req, res) => {
   try {
     const players = await Players.findAll();
@@ -87,4 +98,5 @@ module.exports = {
   getPlayer,
   updatePlayer,
   deletePlayer,
+  fetchPlayersBySets
 };
