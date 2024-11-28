@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": "Techuz@123",
-    "database": "cricTech",
+    "username": "divorcex",
+    "password": "GvMsNzV7@cXD1ts.",
+    "database": "crictech",
     "host": "localhost",
     "dialect": "mysql"
   },
@@ -14,10 +14,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "tajtourstravels_taj",
-    "password": "Tajtourstravels@2024#",
-    "database": "tajtourstravels_taj",
+    "username": "divorcex",
+    "password": "GvMsNzV7@cXD1ts.",
+    "database": "crictech",
     "host": "tajtoursandtravels.com",
     "dialect": "mysql"
   }
 }
+

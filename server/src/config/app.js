@@ -2,7 +2,7 @@ require('dotenv').config({ path: '../../.env' });
 
 module.exports = {
   appName: process.env.APP_NAME,
-  port: process.env.SERVER_PORT || 4000,
+  port: process.env.SERVER_PORT || 7000,
   logging: { debugSQL: !!process.env.DEBUG_SQL || false },
   enableLogging: !!process.env.ENABLE_LOGGING || false,
   allowedHosts: process.env.ALLOWED_HOSTS,
@@ -28,3 +28,7 @@ module.exports = {
 
   dateFormat: 'YYYY-MM-DD',
 };
+
+
+
+

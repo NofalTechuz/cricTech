@@ -1,0 +1,14 @@
+{
+    "apps": [
+      {
+        "name": "ct-node-server",
+        "script": "npm",
+        "args": "run start"
+      }
+    ]
+  }
+  
+  
+  
+  
+  
