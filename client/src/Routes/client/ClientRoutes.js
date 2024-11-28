@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import HomePage from "../../pages/client/Homepage";
 import PlayersPage from "../../pages/client/PlayersPage";
 import "../../assets/css/client/main.css";
+import TeamPlayers from "../../pages/client/TeamPlayers";
 
 const NotFound = React.lazy(() => import('../../pages/client/404/NotFound'));
 
@@ -12,6 +13,7 @@ function ClientRoutes() {
       <Routes>
       <Route path="/" element={<HomePage/>} />
       <Route path="/players" element={<PlayersPage/>} />
+      <Route path="/team-details" element={<TeamPlayers/>} />
           
 
       </Routes>

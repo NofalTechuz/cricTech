@@ -1,142 +1,180 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
-import PublicApiInstance from "../../Utils/PublicApiInstance";
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import PublicApiInstance from '../../Utils/PublicApiInstance';
+import '../../assets/css/client/Players.css';
+import '../../assets/css/admin/form.css';
+import DropdownField from '../../modules/Admin/Forms/DropdownField';
 
-const playersData = {
-    A: [
-      {
-        name: "Player A1",
-        roles: ["batter", "bowler"],
-        battingAvg: 45.5,
-        bowlingAvg: 25.3,
-        catches: 50,
-        link: "https://cricheroes.com/player-profile/2985185/ketan-aahuja/stats",
-      },
-      {
-        name: "Player A2",
-        roles: ["bowler"],
-        battingAvg: 22.1,
-        bowlingAvg: 18.7,
-        catches: 30,
-        link: "https://cricheroes.com/player-profile/2985185/ketan-aahuja/stats",
-      },
-      {
-        name: "Player A3",
-        roles: ["batter", "wk"],
-        battingAvg: 35.8,
-        bowlingAvg: null,
-        catches: 150,
-        link: "https://cricheroes.com/player-profile/2985185/ketan-aahuja/stats",
-      },
-    ],
-    B: [
-      {
-        name: "Player B1",
-        roles: ["batter"],
-        battingAvg: 52.3,
-        bowlingAvg: 35.1,
-        catches: 40,
-        link: "https://example.com/player-b1",
-      },
-      {
-        name: "Player B2",
-        roles: ["bowler", "batter"],
-        battingAvg: 18.9,
-        bowlingAvg: 22.5,
-        catches: 25,
-        link: "https://example.com/player-b2",
-      },
-      {
-        name: "Player B3",
-        roles: ["wk", "batter", "bowler"],
-        battingAvg: 30.2,
-        bowlingAvg: 28.5,
-        catches: 130,
-        link: "https://example.com/player-b3",
-      },
-    ],
-    // Add data for Set C similarly
+const PlayersPage = () => {
+  const location = useLocation();
+  const [players, setPlayers] = useState([]);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [teams, setTeams] = useState([]);
+  const [teamId, setTeamId] = useState("");
+
+  const set = new URLSearchParams(location.search).get('set');
+
+  const fetchPlayers = async () => {
+    try {
+      const response = await PublicApiInstance.get(`/players/sets/${set}`);
+      console.log(response);
+      setPlayers(response.data.data);
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to fetch players.');
+    }
   };
-  
-  const PlayersPage = () => {
-    const location = useLocation();
-    const [players, setPlayers] = useState([]);
-    const [selectedPlayer, setSelectedPlayer] = useState(null);
-  
-    const set = new URLSearchParams(location.search).get("set");
-  
-    const fetchPlayers = async () => {
-      try {
-        const response = await PublicApiInstance.get(`/players/sets/${set}`);
-        console.log(response);
-        setPlayers(response.data.data);
-      } catch (error) {
-        console.error(error);
-        toast.error('Failed to fetch players.');
-      }
-    };
 
-    useEffect(() => {
 
+  const fetchTeams = async () => {
+    try {
+      const response = await PublicApiInstance.get('/teams');
+      setTeams(response.data.data);
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to fetch teams.');
+    }
+  };
+
+  useEffect(() => {
+    fetchPlayers();
+    fetchTeams();
+  }, [set]);
+
+  const handlePlayerClick = (player) => {
+    setSelectedPlayer(player);
+  };
+
+  const closeModal = () => {
+    setSelectedPlayer(null);
+  };
+
+
+  const SoldPlayer = async (id) => {
+    if(teamId === "") {
+      toast.error('Please select a team');
+      return
+    }
+    try {
+      const data = { teamId: teamId };
+      await PublicApiInstance.put(`/players/sold/${id}`, data);
+      toast.success('Player sold successfully');
       fetchPlayers();
-    }, [set]);
-  
-    const handlePlayerClick = (player) => {
-      setSelectedPlayer(player);
-    };
-  
-    const closeModal = () => {
-      setSelectedPlayer(null);
-    };
-  
-    return (
-      <div className="container">
-        <h1>Cricket Team Viewer</h1>
-        <h2>{set ? `Set ${set} Players` : "Players"}</h2>
-        <Link to="/" className="back-button">
-          Back to Sets
-        </Link>
-        <div id="players-container">
+      closeModal();
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to sold player.');
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>Cricket Team Viewer</h1>
+      <h2>{set ? `Set ${set} Players` : 'Players'}</h2>
+      <Link to="/" className="back-button">
+        Back to Sets
+      </Link>
+      <div class="container">
+        <div class="card-grid">
           {players.map((player, index) => (
-            <div
-              key={index}
-              className="player-card"
-              onClick={() => handlePlayerClick(player)}
-            >
-              <div className="player-avatar">
-                <span className="player-icon">👤</span>
+            <div class="player-card" onClick={() => handlePlayerClick(player)}>
+              <div class="player-logo">
+                <img src="/player.webp" alt="Player 1" class="player-image" />
               </div>
-              <div className="player-name">{player.name}</div>
-              <div className="player-roles">
-                {player.skill.includes("batsman") && <span className="role-icon">🏏</span>}
-                {player.skill.includes("bowler") && <span className="role-icon">🎳</span>}
-                {player.skill.includes("wicket keeper") && <span className="role-icon">🧤</span>}
+              <h2 class="player-name">{player.name}</h2>
+              <div class="player-roles">
+                {player.skill.includes('batsman') && (
+                  <span class="role batsman" title="Batsman">
+                    🏏
+                  </span>
+                )}
+                {player.skill.includes('bowler') && (
+                  <span class="role bowler" title="Bowler">
+                    🎳
+                  </span>
+                )}
+                {player.skill.includes('wicket keeper') && (
+                  <span class="role wicketkeeper" title="Wicketkeeper">
+                    🧤
+                  </span>
+                )}
+              </div>
+              <div class="player-actions">
+               <p>is Sold : {player.is_sold ? "Yes" : "No"}</p>
               </div>
             </div>
           ))}
         </div>
-  
-        {selectedPlayer && (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close" onClick={closeModal}>
-                &times;
-              </span>
-              <h2>{selectedPlayer.name}</h2>
-              <iframe
-                src={selectedPlayer.link}
-                title={selectedPlayer.name}
-                width="100%"
-                height="500px"
-                style={{ border: "none" }}
-              ></iframe>
+      </div>
+      {/* <div id="players-container">
+        {players.map((player, index) => (
+          <div key={index} className="player-card" onClick={() => handlePlayerClick(player)}>
+            <div className="player-avatar">
+              <span className="player-icon">👤</span>
+            </div>
+            <div className="player-name">{player.name}</div>
+            <div className="player-roles">
+              {player.skill.includes('batsman') && <span className="role-icon">🏏</span>}
+              {player.skill.includes('bowler') && <span className="role-icon">🎳</span>}
+              {player.skill.includes('wicket keeper') && <span className="role-icon">🧤</span>}
             </div>
           </div>
-        )}
-      </div>
-    );
-  };
-  
-  export default PlayersPage;
-  
+        ))}
+      </div> */}
+
+      {selectedPlayer && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>
+              &times;
+            </span>
+            <h2>{selectedPlayer.name}</h2>
+            <iframe
+              src={selectedPlayer.link}
+              title={selectedPlayer.name}
+              width="100%"
+              height="650px"
+              style={{ border: 'none' }}
+            ></iframe>
+
+          {
+            !selectedPlayer.is_sold && (
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div>
+                <button className="back-button" onClick={closeModal}>
+                  Unsold
+                </button>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <form>
+                  <div className="flex-row" style={{ display: 'flex', alignItems: 'center' }}>
+                    <label style={{ marginRight: '10px' }}>Select Team</label>
+                    <div className="form-group mb-0">
+                      <DropdownField
+                        options={teams}
+                        valueKey="id"
+                        labelKey="name"
+                        name="skill"
+                        onChange={(e) => {
+                          setTeamId(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </form>
+                <button className="back-button" onClick={() => {SoldPlayer(selectedPlayer.id)}}>
+                  Sold
+                </button>
+              </div>
+            </div>
+            )
+          }
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default PlayersPage;

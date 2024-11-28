@@ -35,6 +35,18 @@ const fetchPlayersBySets = async (req, res) => {
 }
 
 
+
+const fetchPlayersByTeams = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const players = await Players.findAll({ where: { team_id: id } });
+    return res.withData(players, 'GET_ALL_PLAYERS', 200);
+  } catch (error) {
+    return res.withError(error)
+  }
+}
+
+
 const getPlayers = async (req, res) => {
   try {
     const players = await Players.findAll();
@@ -77,6 +89,36 @@ const updatePlayer = async (req, res) => {
 
 
 
+const SoldPlayer = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const player = await Players.findByPk(id);
+    if (!player) {
+      return res.status(404).json({ message: 'Player not found' });
+    }
+    await player.update({ is_sold: true, team_id: req.body.teamId });
+    return res.withData(player, 'PLAYER_SOLD_SUCCESSFULLY', 200);
+  } catch (error) {
+    return res.withError(error)
+  }
+};
+
+
+const UnsoldPlayer = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const player = await Players.findByPk(id);
+    if (!player) {
+      return res.status(404).json({ message: 'Player not found' });
+    }
+    await player.update({ is_sold: false, team_id: null });
+    return res.withData(player, 'PLAYER_UNSOLD_SUCCESSFULLY', 200);
+  } catch (error) {
+    return res.withError(error)
+  }
+};
+
+
 const deletePlayer = async (req, res) => {
   try {
     const { id } = req.params;
@@ -97,6 +139,8 @@ module.exports = {
   getPlayers,
   getPlayer,
   updatePlayer,
+  SoldPlayer,
   deletePlayer,
-  fetchPlayersBySets
+  fetchPlayersBySets,
+  fetchPlayersByTeams
 };
