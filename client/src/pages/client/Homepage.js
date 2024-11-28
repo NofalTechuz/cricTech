@@ -30,31 +30,37 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="container">
-      <h1>Cricket Team Viewer</h1>
-
-      {/* Sets Section */}
-      <h2>Sets</h2>
-      <div id="sets-container" className="grid-container">
-        {sets.map((set, index) => (
-          <Link to={`/players?set=${set.id}`} key={index} className="set-card">
-            <h3>{set.name}</h3>
-            <p>{set.description || 'Description not available'}</p>
-          </Link>
-        ))}
+    <>
+      <div style={{ backgroundImage:"linear-gradient(143.7deg,#a72056 0,#fc0 100%)", color: 'white', padding: '20px', textAlign: 'center', position:"sticky", height:"100px" }}>
+        <h1 style={{ color: 'white' }}>Techuz Cricket League Season - 4</h1>
       </div>
+      <div className="container">
+        {/* Sets Section */}
+        <h2>Sets</h2>
+        <div id="sets-container" className="grid-container">
+          {sets.map((set, index) => (
+            <Link to={`/players?set=${set.id}`} key={index} className="set-card">
+              <h3>{set.name}</h3>
+              <p>{set.description || 'Description not available'}</p>
+            </Link>
+          ))}
+        </div>
 
-      {/* Teams Section */}
-      <h2>Teams</h2>
-      <div id="teams-container" className="grid-container">
-        {teams.map((team, index) => (
-          <Link to={`/team-details?team=${team.id}`} key={index} className="team-card">
-            <h3>{team.name}</h3>
-            <p>{team.motto || 'Motto not available'}</p>
-          </Link>
-        ))}
+        {/* Teams Section */}
+        <h2>Teams</h2>
+        <div id="teams-container" className="grid-container">
+          {teams.map((team, index) => (
+            <div style={{ backgroundImage:`linear-gradient(143.7deg,${team.color_1} 0,${team.color_2} 100%)`, }} className='team-card'>
+
+            <Link to={`/team-details?team=${team.id}`} key={index} style={{textDecoration:"none", color:"white"}} >
+              <h3>{team.name}</h3>
+              <p>{team.motto || 'Motto not available'}</p>
+            </Link>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

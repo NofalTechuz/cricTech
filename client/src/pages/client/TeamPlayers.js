@@ -7,55 +7,64 @@ import '../../assets/css/admin/form.css';
 import DropdownField from '../../modules/Admin/Forms/DropdownField';
 
 const TeamPlayers = () => {
-    const location = useLocation();
-    const [players, setPlayers] = useState([]);
-    const [selectedPlayer, setSelectedPlayer] = useState(null);
-    const [teams, setTeams] = useState([]);
-    const [teamId, setTeamId] = useState("");
-  
-    const set = new URLSearchParams(location.search).get('team');
-  
-    const fetchPlayers = async () => {
-      try {
-        const response = await PublicApiInstance.get(`/players/teams/${set}`);
-        console.log(response);
-        setPlayers(response.data.data);
-      } catch (error) {
-        console.error(error);
-        toast.error('Failed to fetch players.');
-      }
-    };
-  
-  
-    const fetchTeams = async (id) => {
-      try {
-        const response = await PublicApiInstance.get(`/teams/${id}`);
-        console.log(response.data)
-        setTeams(response.data.data);
-      } catch (error) {
-        console.error(error);
-        toast.error('Failed to fetch teams.');
-      }
-    };
-  
-    useEffect(() => {
-      fetchPlayers();
-      fetchTeams(set);
-    }, [set]);
-  
-    const handlePlayerClick = (player) => {
-      setSelectedPlayer(player);
-    };
-  
-    const closeModal = () => {
-      setSelectedPlayer(null);
-    };
-  
-  
-  
-    return (
+  const location = useLocation();
+  const [players, setPlayers] = useState([]);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [teams, setTeams] = useState([]);
+  const [teamId, setTeamId] = useState('');
+
+  const set = new URLSearchParams(location.search).get('team');
+
+  const fetchPlayers = async () => {
+    try {
+      const response = await PublicApiInstance.get(`/players/teams/${set}`);
+      console.log(response);
+      setPlayers(response.data.data);
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to fetch players.');
+    }
+  };
+
+  const fetchTeams = async (id) => {
+    try {
+      const response = await PublicApiInstance.get(`/teams/${id}`);
+      console.log(response.data);
+      setTeams(response.data.data);
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to fetch teams.');
+    }
+  };
+
+  useEffect(() => {
+    fetchPlayers();
+    fetchTeams(set);
+  }, [set]);
+
+  const handlePlayerClick = (player) => {
+    setSelectedPlayer(player);
+  };
+
+  const closeModal = () => {
+    setSelectedPlayer(null);
+  };
+
+  return (
+    <>
+      <div
+        style={{
+          backgroundImage: 'linear-gradient(143.7deg,#a72056 0,#fc0 100%)',
+          color: 'white',
+          padding: '20px',
+          textAlign: 'center',
+          position: 'sticky',
+          height: '100px',
+        }}
+      >
+        <h1 style={{ color: 'white' }}>Techuz Cricket League Season - 4</h1>
+      </div>
       <div className="container">
-        <h1>Cricket Team Viewer</h1>
         <h2>{teams ? `${teams.name} Players` : 'Players'}</h2>
         <Link to="/" className="back-button">
           Back to Sets
@@ -107,7 +116,7 @@ const TeamPlayers = () => {
             </div>
           ))}
         </div> */}
-  
+
         {selectedPlayer && (
           <div className="modal">
             <div className="modal-content">
@@ -122,13 +131,12 @@ const TeamPlayers = () => {
                 height="650px"
                 style={{ border: 'none' }}
               ></iframe>
-  
-           
             </div>
           </div>
         )}
       </div>
-    );
-}
+    </>
+  );
+};
 
-export default TeamPlayers
+export default TeamPlayers;

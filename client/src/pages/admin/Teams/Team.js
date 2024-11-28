@@ -5,6 +5,7 @@ import DeleteConfirmationModal from '../../../Components/admin/DeleteConfirmatio
 import axios from 'axios';
 import TextareaInput from '../../../modules/Admin/Forms/TextareaInput';
 import PublicApiInstance from '../../../Utils/PublicApiInstance';
+import TextInputField from '../../../modules/Admin/Forms/TextInputField';
 
 const Team = () => {
   const [teams, setTeams] = useState([]);
@@ -17,6 +18,8 @@ const Team = () => {
   const [loading, setLoading] = useState(false);
   const [setData, setTeamData] = useState({
     name: '',
+    color_1: '',
+    color_2: '',
   });
 
   const toggleDropdown = (index) => {
@@ -145,6 +148,8 @@ const Team = () => {
               <tr>
                 <th>#</th>
                 <th>Name</th>
+                <th>Color  1</th>
+                <th>Color  2</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -154,6 +159,8 @@ const Team = () => {
                   <tr key={set.id}>
                     <td>{index + 1}</td>
                     <td>{set.name}</td>
+                    <td>{set.color_1}</td>
+                    <td>{set.color_2}</td>
                     <td>
                       <button
                         className="btn btn-sm btn-warning"
@@ -165,7 +172,11 @@ const Team = () => {
                       >
                         Edit
                       </button>
-                      <button className="btn btn-sm btn-danger" style={{ marginLeft: '10px' }} onClick={() => openDeleteModal(set)}>
+                      <button
+                        className="btn btn-sm btn-danger"
+                        style={{ marginLeft: '10px' }}
+                        onClick={() => openDeleteModal(set)}
+                      >
                         Delete
                       </button>
                     </td>
@@ -207,6 +218,27 @@ const Team = () => {
                     />
                   </div>
                 </div>
+                <div className="flex-row">
+                  <div className="form-group mb-0">
+                    <TextInputField
+                      label="Color Code 1"
+                      name="color_1"
+                      placeholder="Color Code 1"
+                      value={setData.color_1}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-group mb-0">
+                    <TextInputField
+                      label="Color Code 2"
+                      name="color_2"
+                      placeholder="Color Code 2"
+                      value={setData.color_2}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
               </form>
             </div>
           </div>
@@ -242,6 +274,27 @@ const Team = () => {
                       name="name"
                       onChange={handleInputChange}
                       value={setData.name}
+                    />
+                  </div>
+                </div>
+                <div className="flex-row">
+                  <div className="form-group mb-0">
+                    <TextInputField
+                      label="Color Code 1"
+                      name="color_1"
+                      placeholder="Color Code 1"
+                      value={setData.color_1}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-group mb-0">
+                    <TextInputField
+                      label="Color Code 2"
+                      name="color_2"
+                      placeholder="Color Code 2"
+                      value={setData.color_2}
+                      onChange={handleInputChange}
                     />
                   </div>
                 </div>

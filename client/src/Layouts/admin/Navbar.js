@@ -5,7 +5,8 @@ const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="nav-logo">
-          <img  src={require("../../assets/image/Logo.png")} alt="Logo" />
+          {/* <img  src={require("../../assets/image/Logo.png")} alt="Logo" /> */}
+          <h4>TCL</h4>
         </div>
 
         <div className="nav-top-section">
@@ -29,9 +30,9 @@ const Navbar = () => {
               <i className="fa-solid fa-angle-down"></i>
             </span>
             <span className="nav-right-section profile-box">
-              <img src={require("../../assets/image/profile-logo.png")} alt="Profile" />
+              {/* <img src={require("../../assets/image/profile-logo.png")} alt="Profile" /> */}
               <p>
-                <b>Moni Roy</b>
+                <b>Techuz Admin</b>
                 <br />
                 Admin
               </p>

@@ -11,7 +11,7 @@ const PlayersPage = () => {
   const [players, setPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [teams, setTeams] = useState([]);
-  const [teamId, setTeamId] = useState("");
+  const [teamId, setTeamId] = useState('');
 
   const set = new URLSearchParams(location.search).get('set');
 
@@ -25,7 +25,6 @@ const PlayersPage = () => {
       toast.error('Failed to fetch players.');
     }
   };
-
 
   const fetchTeams = async () => {
     try {
@@ -50,11 +49,10 @@ const PlayersPage = () => {
     setSelectedPlayer(null);
   };
 
-
   const SoldPlayer = async (id) => {
-    if(teamId === "") {
+    if (teamId === '') {
       toast.error('Please select a team');
-      return
+      return;
     }
     try {
       const data = { teamId: teamId };
@@ -69,48 +67,63 @@ const PlayersPage = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Cricket Team Viewer</h1>
-      <h2>{set ? `Set ${set} Players` : 'Players'}</h2>
-      <Link to="/" className="back-button">
-        Back to Sets
-      </Link>
-      <div class="container">
-        <div class="card-grid">
-        {players.map((player, index) => (
-  <div className="player-card" key={index} onClick={() => handlePlayerClick(player)}>
-    {/* Ribbon */}
-    {player.is_sold && (
+    <>
       <div
-        className={`player-ribbon ${player.is_sold == 1 ? 'sold' : 'unsold'}`}
+        style={{
+          backgroundImage: 'linear-gradient(143.7deg,#a72056 0,#fc0 100%)',
+          color: 'white',
+          padding: '20px',
+          textAlign: 'center',
+          position: 'sticky',
+          height: '100px',
+        }}
       >
-        {player.is_sold == 1 ? 'Sold' : 'Unsold'}
+        <h1 style={{ color: 'white' }}>Techuz Cricket League Season - 4</h1>
       </div>
-    )}
-    <div className="player-logo">
-      <img src="/player.webp" alt="Player" className="player-image" />
-    </div>
-    <h2 className="player-name">{player.name}</h2>
-    <div className="player-roles">
-      {player.skill.includes('batsman') && (
-        <span className="role batsman" title="Batsman">🏏</span>
-      )}
-      {player.skill.includes('bowler') && (
-        <span className="role bowler" title="Bowler">🎳</span>
-      )}
-      {player.skill.includes('wicket keeper') && (
-        <span className="role wicketkeeper" title="Wicketkeeper">🧤</span>
-      )}
-    </div>
-    {/* <div className="player-actions">
+      <div className="container">
+        <h2>{set ? `Set ${set} Players` : 'Players'}</h2>
+        <Link to="/" className="back-button">
+          Back to Sets
+        </Link>
+        <div class="container">
+          <div class="card-grid">
+            {players.map((player, index) => (
+              <div className="player-card" key={index} onClick={() => handlePlayerClick(player)}>
+                {/* Ribbon */}
+                {player.is_sold && (
+                  <div className={`player-ribbon ${player.is_sold == 1 ? 'sold' : 'unsold'}`}>
+                    {player.is_sold == 1 ? 'Sold' : 'Unsold'}
+                  </div>
+                )}
+                <div className="player-logo">
+                  <img src="/player.webp" alt="Player" className="player-image" />
+                </div>
+                <h2 className="player-name">{player.name}</h2>
+                <div className="player-roles">
+                  {player.skill.includes('batsman') && (
+                    <span className="role batsman" title="Batsman">
+                      🏏
+                    </span>
+                  )}
+                  {player.skill.includes('bowler') && (
+                    <span className="role bowler" title="Bowler">
+                      🎳
+                    </span>
+                  )}
+                  {player.skill.includes('wicket keeper') && (
+                    <span className="role wicketkeeper" title="Wicketkeeper">
+                      🧤
+                    </span>
+                  )}
+                </div>
+                {/* <div className="player-actions">
       <p>Is Sold: {player.is_sold ? "Yes" : "No"}</p>
     </div> */}
-  </div>
-))}
-
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      {/* <div id="players-container">
+        {/* <div id="players-container">
         {players.map((player, index) => (
           <div key={index} className="player-card" onClick={() => handlePlayerClick(player)}>
             <div className="player-avatar">
@@ -126,59 +139,63 @@ const PlayersPage = () => {
         ))}
       </div> */}
 
-      {selectedPlayer && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>
-              &times;
-            </span>
-            <h2>{selectedPlayer.name}</h2>
-            <iframe
-              src={selectedPlayer.link}
-              title={selectedPlayer.name}
-              width="100%"
-              height="650px"
-              style={{ border: 'none' }}
-            ></iframe>
+        {selectedPlayer && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={closeModal}>
+                &times;
+              </span>
+              <h2>{selectedPlayer.name}</h2>
+              <iframe
+                src={selectedPlayer.link}
+                title={selectedPlayer.name}
+                width="100%"
+                height="650px"
+                style={{ border: 'none' }}
+              ></iframe>
 
-<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          {
-            !selectedPlayer.is_sold && (
-              <div style={{ display: 'flex', flexDirection: 'row' }} > 
-                <form>
-                  <div className="flex-row" style={{ display: 'flex', alignItems: 'center' }}>
-                    <label style={{ marginRight: '10px' }}>Select Team</label>
-                    <div className="form-group mb-0">
-                      <DropdownField
-                        options={teams}
-                        valueKey="id"
-                        labelKey="name"
-                        name="skill"
-                        onChange={(e) => {
-                          setTeamId(e.target.value);
-                        }}
-                      />
-                    </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                {!selectedPlayer.is_sold && (
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <form>
+                      <div className="flex-row" style={{ display: 'flex', alignItems: 'center' }}>
+                        <label style={{ marginRight: '10px' }}>Select Team</label>
+                        <div className="form-group mb-0">
+                          <DropdownField
+                            options={teams}
+                            valueKey="id"
+                            labelKey="name"
+                            name="skill"
+                            onChange={(e) => {
+                              setTeamId(e.target.value);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </form>
+                    <button
+                      className="back-button"
+                      onClick={() => {
+                        SoldPlayer(selectedPlayer.id);
+                      }}
+                    >
+                      Sold
+                    </button>
                   </div>
-                </form>
-                <button className="back-button" onClick={() => {SoldPlayer(selectedPlayer.id)}}>
-                  Sold
-                </button>
+                )}
+                <div>
+                  <button className="back-button">
+                    <a href={selectedPlayer.link} target="_blank" style={{ color: '#fff', textDecoration: 'none' }}>
+                      Visit Profile
+                    </a>
+                  </button>
+                </div>
               </div>
-            )
-          }
-              <div>
-              <button className="back-button">
-                <a href={selectedPlayer.link} target="_blank" style={{color: "#fff", textDecoration: "none"}}>
-                  Visit Profile
-                </a>
-                </button>
-              </div>
+            </div>
           </div>
-          </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -12,6 +12,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      color_1: {
+        type: DataTypes.STRING(7), // For hex color codes
+        allowNull: true,
+      },
+      color_2: {
+        type: DataTypes.STRING(7), // For hex color codes
+        allowNull: true,
+      },
     },
     {
       timestamps: true,
