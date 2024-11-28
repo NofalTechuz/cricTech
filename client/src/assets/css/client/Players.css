@@ -122,3 +122,43 @@ h1 {
     }
 }
 
+
+
+/* Ribbon styling */
+.player-ribbon {
+    position: absolute;
+    top: 10px;
+    right: -10px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: white;
+    transform: rotate(45deg);
+    z-index: 1;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.player-ribbon.sold {
+    background-color: green;
+}
+
+.player-ribbon.unsold {
+    background-color: black;
+}
+
+/* Ensure the ribbon does not affect the card layout */
+.player-card {
+    position: relative;
+    background-color: var(--card-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+

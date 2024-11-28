@@ -85,9 +85,9 @@ const TeamPlayers = () => {
                     </span>
                   )}
                 </div>
-                <div class="player-actions">
+                {/* <div class="player-actions">
                  <p>is Sold : {player.is_sold ? "Yes" : "No"}</p>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

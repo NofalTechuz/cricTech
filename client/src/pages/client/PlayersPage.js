@@ -77,34 +77,37 @@ const PlayersPage = () => {
       </Link>
       <div class="container">
         <div class="card-grid">
-          {players.map((player, index) => (
-            <div class="player-card" onClick={() => handlePlayerClick(player)}>
-              <div class="player-logo">
-                <img src="/player.webp" alt="Player 1" class="player-image" />
-              </div>
-              <h2 class="player-name">{player.name}</h2>
-              <div class="player-roles">
-                {player.skill.includes('batsman') && (
-                  <span class="role batsman" title="Batsman">
-                    🏏
-                  </span>
-                )}
-                {player.skill.includes('bowler') && (
-                  <span class="role bowler" title="Bowler">
-                    🎳
-                  </span>
-                )}
-                {player.skill.includes('wicket keeper') && (
-                  <span class="role wicketkeeper" title="Wicketkeeper">
-                    🧤
-                  </span>
-                )}
-              </div>
-              <div class="player-actions">
-               <p>is Sold : {player.is_sold ? "Yes" : "No"}</p>
-              </div>
-            </div>
-          ))}
+        {players.map((player, index) => (
+  <div className="player-card" key={index} onClick={() => handlePlayerClick(player)}>
+    {/* Ribbon */}
+    {player.is_sold && (
+      <div
+        className={`player-ribbon ${player.is_sold == 1 ? 'sold' : 'unsold'}`}
+      >
+        {player.is_sold == 1 ? 'Sold' : 'Unsold'}
+      </div>
+    )}
+    <div className="player-logo">
+      <img src="/player.webp" alt="Player" className="player-image" />
+    </div>
+    <h2 className="player-name">{player.name}</h2>
+    <div className="player-roles">
+      {player.skill.includes('batsman') && (
+        <span className="role batsman" title="Batsman">🏏</span>
+      )}
+      {player.skill.includes('bowler') && (
+        <span className="role bowler" title="Bowler">🎳</span>
+      )}
+      {player.skill.includes('wicket keeper') && (
+        <span className="role wicketkeeper" title="Wicketkeeper">🧤</span>
+      )}
+    </div>
+    {/* <div className="player-actions">
+      <p>Is Sold: {player.is_sold ? "Yes" : "No"}</p>
+    </div> */}
+  </div>
+))}
+
         </div>
       </div>
       {/* <div id="players-container">
@@ -141,11 +144,11 @@ const PlayersPage = () => {
           {
             !selectedPlayer.is_sold && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
+              {/* <div>
                 <button className="back-button" onClick={closeModal}>
                   Unsold
                 </button>
-              </div>
+              </div> */}
               <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <form>
                   <div className="flex-row" style={{ display: 'flex', alignItems: 'center' }}>
