@@ -19,3 +19,14 @@ Stack: ReferenceError: reswithData is not defined
     at addTeam (/home/brijesh/Desktop/Projects/Auction/server/src/Controllers/Team/teamController.js:9:9)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 
+2024-11-28T14:24:50.986Z - Error: EIO: i/o error, write
+    at writeSync (node:fs:931:3)
+    at SyncWriteStream._write (node:internal/fs/sync_write_stream:27:5)
+    at writeOrBuffer (node:internal/streams/writable:570:12)
+    at _write (node:internal/streams/writable:499:10)
+    at Writable.write (node:internal/streams/writable:508:10)
+    at console.value (node:internal/console/constructor:311:16)
+    at console.log (node:internal/console/constructor:386:26)
+    at Object.<anonymous> (/home/brijesh/Desktop/Projects/Auction/server/src/config/uri.js:7:9)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
